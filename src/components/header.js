@@ -1,8 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Modal from './modal'
 
 
-function Header () {
+class Header extends React.Component {
+
+  state = {
+    modalIsOpen: false
+  }
+
+  handleOpenModal = e => {
+      this.setState({ modalIsOpen: true });
+  };
+
+  handleCloseModal = e => {
+      this.setState({ modalIsOpen: false });
+  };
+
+  render(){ 
+
   return (
     <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -13,11 +29,17 @@ function Header () {
               </li>
             </ul>
           </div>
-          <button className="btn btn-success" data-toggle="modal" data-target="#login">Login</button>
+          <button className="btn btn-success" onClick={this.handleOpenModal}>Login</button>
 
         </nav>
+        <Modal 
+					onOpenModal={this.handleOpenModal}
+					onCloseModal={this.handleCloseModal}
+        	modalIsOpen={this.state.modalIsOpen} 
+        />
       </React.Fragment>
-  )
+    )
+  }
 }
     
 

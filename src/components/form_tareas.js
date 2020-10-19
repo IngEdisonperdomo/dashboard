@@ -1,9 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-import img from '../assets/images/red.jpg'
+//import img from '../assets/images/red.jpg'
 //import urlGet from '../config'
 
-class Form extends React.Component {
+class Form_tareas extends React.Component {
   
 
   state = {
@@ -30,7 +30,7 @@ class Form extends React.Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    this.props.history.push('/dashboard')
+    this.props.history.push('/tareas/list')
     
   //  try {
   //      let config = {
@@ -69,13 +69,11 @@ class Form extends React.Component {
         <div className="container">
           <div className="row">
 
-            <div className="col-md-6 mt-4">
-              <img src={img} className="img-fluid" alt="red" />
-            </div>
-            <div className="col-md-6 mt-4">
+            
+            <div className="col-md-12 mt-4">
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="Nombre">Título</label>
+                  <label htmlFor="Nombre">Nombre</label>
                   <input type="text" 
                   name="nombre" 
                   className="form-control" 
@@ -84,20 +82,20 @@ class Form extends React.Component {
                   onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="email"  
-                  name="email" 
+                  <label htmlFor="descripcion">Descripción</label>
+                  <input type="text"  
+                  name="descripcion" 
                   className="form-control" 
-                  id="email" 
+                  id="descripcion" 
                   aria-describedby="emailHelp" 
                   onChange={this.handleChange}/>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input type="password" 
-                  name="password" 
+                  <label htmlFor="image">Image</label>
+                  <input type="text" 
+                  name="image" 
                   className="form-control" 
-                  id="password" 
+                  id="image" 
                   onChange={this.handleChange}/>
                 </div>
 
@@ -105,7 +103,7 @@ class Form extends React.Component {
                   type="submit"  
                   className="btn btn-primary"
                   
-                  >Crear Cuenta</button>
+                  >Crear Tarea</button>
               </form>
             </div>
 
@@ -118,4 +116,4 @@ class Form extends React.Component {
   }
 }
 
-export default withRouter(Form) 
+export default withRouter(Form_tareas) 

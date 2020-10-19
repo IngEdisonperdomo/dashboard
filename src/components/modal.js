@@ -1,46 +1,57 @@
 import React from 'react'
+//import urlGet from '../config'
+import { withRouter } from 'react-router'
+import { Button, Modal, Form } from 'react-bootstrap';
 
 
-class Modal extends React.Component {
+class Modals extends React.Component {
 
+  handleSubmit = async e => {
+    e.preventDefault();
 
+    this.props.onCloseModal();
+    this.props.history.push('/dashboard')
+  }
+  
 
   render() {
     return (
       <React.Fragment>
+         
 
-        <div className="modal fade" id="login" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header text-center">
-                <h5 className="modal-title" id="exampleModalLabel">Ingresar</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" id="password" aria-describedby="emailHelp" />
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Ingresar</button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <Modal show={this.props.modalIsOpen} onHide={this.props.onCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={this.handleSubmit}>
+        <Modal.Body>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" />
+            
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.props.onCloseModal}>
+            Close
+          </Button>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Modal.Footer>
+        </Form>
+      </Modal>
+       
       </React.Fragment>
     )
   }
 
 
 }
-export default Modal
+export default withRouter(Modals)
