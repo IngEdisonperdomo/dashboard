@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import img from '../assets/images/red.jpg'
+import {Alert} from 'react-bootstrap';
 //import urlGet from '../config'
 
 class Form extends React.Component {
@@ -13,11 +14,15 @@ class Form extends React.Component {
       password:'',
     },
     loading:false,
-    error: null
+    error: true,
+    errors: null,
+    button: null,
+    msg:null
   }
 
   handleChange = e => {
 
+    
     //console.log(e.target.value)
     this.setState({
       form: {
@@ -30,7 +35,29 @@ class Form extends React.Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    this.props.history.push('/dashboard')
+    
+    if(!this.state.form.nombre){
+      this.setState({
+        error:null,
+        msg: "nombre es requerido"
+      })
+    }else if(!this.state.form.email){
+        this.setState({
+          error:null,
+          msg: "email es requerido"
+        })
+
+  }else if(!this.state.form.password){
+        this.setState({
+          error:null,
+          msg: "password es requerido"
+        })
+      
+    }else{
+      this.props.history.push('/dashboard')
+    }
+
+    
     
   //  try {
   //      let config = {
@@ -64,15 +91,25 @@ class Form extends React.Component {
 
 
   render() {
+    let errors;
+    
+    if (!this.state.error) {
+      errors = <Alert variant='danger' className="mt-3 mb-3">{this.state.msg} Requerido</Alert>;
+    }
+
+
     return (
       <React.Fragment>
         <div className="container">
           <div className="row">
-
+            
             <div className="col-md-6 mt-4">
+              
               <img src={img} className="img-fluid" alt="red" />
             </div>
             <div className="col-md-6 mt-4">
+            
+
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="Nombre">Título</label>
@@ -82,6 +119,9 @@ class Form extends React.Component {
                   id="nombre" 
                   aria-describedby="emailHelp" 
                   onChange={this.handleChange} />
+
+                  
+                  
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
@@ -91,6 +131,9 @@ class Form extends React.Component {
                   id="email" 
                   aria-describedby="emailHelp" 
                   onChange={this.handleChange}/>
+
+                  
+
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
@@ -99,6 +142,9 @@ class Form extends React.Component {
                   className="form-control" 
                   id="password" 
                   onChange={this.handleChange}/>
+
+                  
+
                 </div>
 
                 <button 
@@ -106,6 +152,8 @@ class Form extends React.Component {
                   className="btn btn-primary"
                   
                   >Crear Cuenta</button>
+
+                  {errors}
               </form>
             </div>
 
