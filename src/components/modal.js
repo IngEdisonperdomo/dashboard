@@ -7,6 +7,7 @@ import {Alert} from 'react-bootstrap';
 
 class Modals extends React.Component {
 
+
   state = {
     form:{
       email:'', 
@@ -42,8 +43,11 @@ class Modals extends React.Component {
       })
   
     }else{
+      console.log(this.props)
 
-      this.props.onCloseModal();
+      
+
+      this.props.onCloseModal()
       this.props.history.push('/dashboard')
     }
   }
